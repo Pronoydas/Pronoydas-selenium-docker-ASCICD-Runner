@@ -6,7 +6,7 @@ services:
       - 4444:4444
     networks:
       - install-jenkins-docker_jenkins  
-  chrome-node:
+  chrome:
     image: selenium/node-chromium:4.32
     container_name: chrome-node
     shm_size: 2gb
@@ -22,7 +22,7 @@ services:
       - SE_VNC_NO_PASSWORD=1
     networks:
       - install-jenkins-docker_jenkins
-  firefox-node:
+  firefox:
     image: selenium/node-firefox:4.32
     shm_size: 2gb
     deploy:
