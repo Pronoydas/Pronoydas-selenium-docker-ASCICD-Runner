@@ -1,9 +1,7 @@
 services:
   docker-selenium:
     image: pronoydas/automation-selenium-docker:latest
-    depends_on:
-     - selenium-hub
-     - chrome-node    
+    container_name: selenium-docker   
     environment:
     - HUB_HOST=selenium-hub
     - IS_ENABLE=true
