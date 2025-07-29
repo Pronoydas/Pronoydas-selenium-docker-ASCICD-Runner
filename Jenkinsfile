@@ -16,7 +16,7 @@ pipeline {
 
         stage("Run Test"){
             steps{
-                sh "docker-compose -f selenium-test.yml up"
+                sh "docker-compose -f selenium-test.yml up --pull=always"
             }
         }
     }
