@@ -12,7 +12,7 @@ services:
     - TEST_SUITE=test-suite.xml
     - THREAD_COUNT=1 
     volumes:
-     -  /C:/Users/prono/OneDrive/Documents/AutomationWIthDockerAndCICD/Result:/home/docker-selenium/test-output
+     -  /./Result:/home/docker-selenium/test-output
     networks:
      - install-jenkins-docker_jenkins
 
