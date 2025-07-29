@@ -1,0 +1,22 @@
+services:
+  docker-selenium:
+    image: pronoydas/automation-selenium-docker:latest
+    depends_on:
+     - selenium-hub
+     - chrome-node    
+    environment:
+    - HUB_HOST=selenium-hub
+    - IS_ENABLE=true
+    - BROWSER=chrome
+    - HOST_IP=192.168.1.35
+    - TEST_SUITE=test-suite.xml
+    - THREAD_COUNT=1 
+    volumes:
+     -  /C:/Users/prono/OneDrive/Documents/AutomationWIthDockerAndCICD/Result:/home/docker-selenium/test-output
+    networks:
+     - install-jenkins-docker_jenkins
+
+networks:
+  install-jenkins-docker_jenkins:
+    driver: bridge
+    external: true

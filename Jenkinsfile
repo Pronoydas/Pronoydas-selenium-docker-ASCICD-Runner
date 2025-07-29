@@ -3,16 +3,27 @@ pipeline {
 
     stages{
 
-        stage("Run Docker Compose"){
+        stage("Setup Grid"){
             steps{
-                sh "docker-compose up"
+                sh "docker-compose -f docker-selenium-grid.yml up -d "
             }
         }
 
-        stage("Clean Up"){
+        stage("Run Test"){
             steps{
-                sh "docker-compose down"
+                sh "docker-compose -f selenium-test.yml up"
             }
+        }
+    }
+
+    post{
+        always{
+
+            sh '''
+            docker-compose -f docker-selenium-grid.yml down 
+            docker-compose -f selenium-test.yml down 
+            '''
+
         }
     }
 }
