@@ -11,7 +11,7 @@ services:
     container_name: chrome-node
     shm_size: 2gb
     deploy:
-      replicas: 1
+      replicas: 0
     depends_on:
       - selenium-hub
     environment:
@@ -22,19 +22,19 @@ services:
       - SE_VNC_NO_PASSWORD=1
     networks:
       - install-jenkins-docker_jenkins
-  # firefox-node:
-  #   image: selenium/node-firefox:4.32
-  #   shm_size: 2gb
-  #   deploy:
-  #     replicas: 1
-  #   depends_on:
-  #     - selenium-hub  
-  #   environment:
-  #   - SE_EVENT_BUS_HOST=selenium-hub
-  #   - SE_EVENT_BUS_PUBLISH_PORT=4442
-  #   - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-  #   - SE_NODE_MAX_SESSIONS=1
-  #   - SE_VNC_NO_PASSWORD=1  
+  firefox-node:
+    image: selenium/node-firefox:4.32
+    shm_size: 2gb
+    deploy:
+      replicas: 0
+    depends_on:
+      - selenium-hub  
+    environment:
+    - SE_EVENT_BUS_HOST=selenium-hub
+    - SE_EVENT_BUS_PUBLISH_PORT=4442
+    - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    - SE_NODE_MAX_SESSIONS=1
+    - SE_VNC_NO_PASSWORD=1  
 networks:
   install-jenkins-docker_jenkins:
     driver: bridge

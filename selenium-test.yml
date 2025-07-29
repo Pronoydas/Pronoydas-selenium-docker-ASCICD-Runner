@@ -5,7 +5,7 @@ services:
     environment:
     - HUB_HOST=selenium-hub
     - IS_ENABLE=true
-    - BROWSER=chrome
+    - BROWSER=${BROWSER}
     - HOST_IP=192.168.1.35
     - TEST_SUITE=test-suite.xml
     - THREAD_COUNT=1 
