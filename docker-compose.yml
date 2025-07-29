@@ -3,6 +3,8 @@ services:
     image: selenium/hub:4.32
     ports:
       - 4444:4444
+    networks:
+      - install-jenkins-docker_jenkins  
   chrome-node:
     image: selenium/node-chromium:4.32
     shm_size: 2gb
@@ -11,11 +13,13 @@ services:
     depends_on:
       - selenium-hub
     environment:
-    - SE_EVENT_BUS_HOST=selenium-hub
-    - SE_EVENT_BUS_PUBLISH_PORT=4442
-    - SE_EVENT_BUS_SUBSCRIBE_PORT=4443  
-    - SE_NODE_MAX_SESSIONS=1
-    - SE_VNC_NO_PASSWORD=1
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443  
+      - SE_NODE_MAX_SESSIONS=1
+      - SE_VNC_NO_PASSWORD=1
+    networks:
+      - install-jenkins-docker_jenkins
   # firefox-node:
   #   image: selenium/node-firefox:4.32
   #   shm_size: 2gb
@@ -30,7 +34,7 @@ services:
   #   - SE_NODE_MAX_SESSIONS=1
   #   - SE_VNC_NO_PASSWORD=1  
   docker-selenium:
-    image: pronoydas/selenium-docker
+    image: pronoydas/automation-selenium-docker:latest
     depends_on:
      - selenium-hub
      - chrome-node    
@@ -43,3 +47,10 @@ services:
     - THREAD_COUNT=1 
     volumes:
      -  /C:/Users/prono/OneDrive/Documents/AutomationWIthDockerAndCICD/Result:/home/docker-selenium/test-output
+    networks:
+     - install-jenkins-docker_jenkins
+
+networks:
+  install-jenkins-docker_jenkins:
+    driver: bridge
+    external: true
