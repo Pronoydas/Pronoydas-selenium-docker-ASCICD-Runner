@@ -10,13 +10,13 @@ pipeline {
 
         stage("Setup Grid"){
             steps{
-                sh "docker-compose -f docker-selenium-grid.yml up --scale=${params.BROWSER}=1  -d "
+                sh "docker compose -f docker-selenium-grid.yml up --scale=${params.BROWSER}=1  -d "
             }
         }
 
         stage("Run Test"){
             steps{
-                sh "docker-compose -f selenium-test.yml up --pull=always"
+                sh "docker compose -f selenium-test.yml up --pull=always"
             }
         }
     }
@@ -25,8 +25,8 @@ pipeline {
         always{
 
             sh '''
-            docker-compose -f docker-selenium-grid.yml down 
-            docker-compose -f selenium-test.yml down 
+            docker compose -f docker-selenium-grid.yml down 
+            docker compose -f selenium-test.yml down 
             '''
 
         }

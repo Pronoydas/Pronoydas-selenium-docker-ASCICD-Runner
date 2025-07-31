@@ -38,4 +38,4 @@ services:
 networks:
   install-jenkins-docker_jenkins:
     driver: bridge
-    external: true
+    external: false
